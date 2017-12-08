@@ -3,7 +3,7 @@
 // CREATE ALL CARDS
 // First we'll create all of the cards, providing the suits,
 // values, and then mapping all the combinations.
-const suits = ['clubs', 'diamonds', 'hearts', 'spades'];
+const suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades'];
 
 // Note that the line below captures the values from 2 - A, where J, Q, K,
 // and A are 11 - 14.  This way is a bit craftier, but you could just simply
@@ -32,7 +32,7 @@ const values = raw_values.map(function(x) {
 
 // Finally creating cards with both the value and the suit
 var cards = function () {
-  return Array.prototype.concat.apply([], values.map(function(x) {
+  var card_array = Array.prototype.concat.apply([], values.map(function(x) {
     return suits.map(function(y) {
       return {
         value: x.value,
@@ -41,7 +41,26 @@ var cards = function () {
       };
     });
   }));
-}
+  card_array.arrange = function(ascending=false) {
+    if (ascending) {
+      this.sort(function(card1, card2) {
+        if (card1.value !== card2.value) {
+          return card1.value - card2.value;
+        }
+        return card1.suit.charCodeAt(0) - card2.suit.charCodeAt(0);
+      });
+    } else {
+      this.sort(function(card1, card2) {
+        if (card1.value !== card2.value) {
+          return card2.value - card1.value;
+        }
+        return card2.suit.charCodeAt(0) - card1.suit.charCodeAt(0);
+      });
+    }
+    return this;
+  }
+  return card_array;
+};
 
 module.exports = {
   suits: new Set(suits),
@@ -59,6 +78,7 @@ module.exports = {
       this.deck[i] = tmp2;
       this.deck[j] = tmp1;
     }
+    return this.deck
   },
   deal: function(num) {
     if (num > this.deck.length || !this.shuffled) {
@@ -67,27 +87,16 @@ module.exports = {
       this.deck = cards();
       this.shuffle();
     }
-    let delt = []
-    for (i=0; i<num; i+=1) {
-      delt.push(this.deck.pop());
+    let delt = this.deck.splice(0, num);
+    delt.arrange = this.deck.arrange;
+    // This next check is just in case exactly 0 cards are left.  In that case, the
+    // deck is now empty and will have a different structure.
+    if (this.deck.length === 0) {
+      console.log('    Shuffling...');
+      this.shuffled = true;
+      this.deck = cards();
+      this.shuffle();
     }
-    return delt
-  },
-  sort: function(hand, ascending=false) {
-    if (ascending) {
-      hand.sort(function(card1, card2) {
-        if (card1.value !== card2.value) {
-          return card1.value - card2.value
-        }
-        return card1.suit.charCodeAt(0) - card2.suit.charCodeAt(0)
-      });
-    } else {
-      hand.sort(function(card1, card2) {
-        if (card1.value !== card2.value) {
-          return card2.value - card1.value
-        }
-        return card2.suit.charCodeAt(0) - card1.suit.charCodeAt(0)
-      });
-    }
+    return delt;
   }
 }
