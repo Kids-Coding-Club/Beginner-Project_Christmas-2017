@@ -14,4 +14,4 @@ This repository, while public, is really meant as a playground for the kids that
 # Please add your names so that we know you were able to change the repository
 
  - Sejong was here.
-
+ - Naomi was here.
