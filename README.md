@@ -11,3 +11,7 @@ This repository, while public, is really meant as a playground for the kids that
  - `app`
    - You all can rename this whatever you want, but the idea is that you should put all of your code into a sub-directory below this parent level.
 
+# Please add your names so that we know you were able to change the repository
+
+ - Sejong was here.
+
