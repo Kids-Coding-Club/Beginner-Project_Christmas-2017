@@ -15,4 +15,5 @@ This repository, while public, is really meant as a playground for the kids that
 
  - Sejong was here.
  - Naomi was here.
- - Mathew also got here.
+ - Gitgudscrubadubdub also got here.
+
