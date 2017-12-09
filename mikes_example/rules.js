@@ -1,6 +1,4 @@
-
-
-var deck = require('./deck.js');
+const deck = require('./deck.js');
 
 // Here is the ordering of all of the poker hands (from highest to lowest):
 /// 10. 5 of a kind (impossible without wilds)
@@ -434,6 +432,38 @@ module.exports = {
       value: card_values[0],
       remaining: card_values.slice(1,5)
     }
+  },
+  // The function below is to be used *WITH* the array sort function.
+  score_sort: function(hand1, hand2) {
+    if (hand1.rank !== hand2.rank) {
+      return hand2.rank - hand1.rank;
+    }
+    if (hand1.hasOwnProperty('value') && hand1.value !== hand2.value) {
+      return hand2.value - hand1.value;
+    }
+    if (hand1.hasOwnProperty('values')) {
+      for (let i=0; i<hand1.values.length; i++) {
+        if (hand1.values[i] !== hand2.values[i]) {
+          return hand2.values[i] - hand1.values[i];
+        }
+      }
+    }
+    if (hand1.hasOwnProperty('cards')) {
+      for (let i=0; i<hand1.cards.length; i++) {
+        if (hand1.cards[i].value !== hand2.cards[i].value) {
+          return hand2.cards[i].value - hand1.cards[i].value;
+        }
+      }
+    }
+    if (hand1.remaining.length < 1) {
+      return 0;
+    }
+    for (let i=0; i<hand1.remaining.length; i++) {
+      if (hand1.remaining[i] !== hand2.remaining[i]) {
+        return hand2.remaining[i] - hand1.remaining[i];
+      }
+    }
+    return 0;
   },
   test_set1:
     [ { value: 13, suit: 'spades', name: 'King of spades' },

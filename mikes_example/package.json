@@ -1,0 +1,12 @@
+{
+  "//": "package.json is a configuration file that helps to create",
+  "//": "a compiled and executable file.",
+  "//": "Look up JSON and package.json for more information.",
+  "//": "E.g., check out: https://docs.npmjs.com/files/package.json",
+  "name": "poker",
+  "version": "0.0.1",
+  "description": "A basic poker game, as a means to show coding techniques",
+  "bin": { "poker": "table.js" },
+  "author": "Mike Williamson",
+  "engines": { "node": "^8.0.0" }
+}

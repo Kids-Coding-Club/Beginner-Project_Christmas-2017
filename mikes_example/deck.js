@@ -1,5 +1,3 @@
-
-
 // CREATE ALL CARDS
 // First we'll create all of the cards, providing the suits,
 // values, and then mapping all the combinations.
