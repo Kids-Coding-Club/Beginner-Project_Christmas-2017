@@ -1,0 +1,34 @@
+Hi everyone, I created a description of the actual "playing" of a seven card poker. Please feel free to make any ajustments. I'm going to add more detail and make things consistent with what Mike had done in his "table.js" example. -Naomi 
+
+Before playing
+	1. Ask number of players.
+	2. Ask what kind of poker.
+	3. Ask player's names.
+	4. Determine seating position.
+	5. Players put antes in the pot.
+	6. Play!
+
+How to Play
+	1. Shuffle the cards.
+	2. Deal the first two round of cards face down.
+	3. Deal one card face up for round 2, 3, 4, and 5, face down for round 6.
+	4. Do one round of betting/playing (this will be expanded later in more details).
+	5. Unless game is over (either only one player remains, or round 6 is finished), repeat 3 and 4 until game over or round 6.
+	6. Determine the winner: last player remaining or the player with the highest ranking hand after round 6.
+	7. The winner takes the pot.
+	8. Ask: Play again?
+	- If yes, go back to 1.
+	- If no, end of game.
+
+One Round Of Betting/Playing
+	1. Determine whose turn it is.
+	2. Ask the player to choose from the 4 choices: pass (only available if the previous play was pass), bet, raise, or fold. 
+		a. If player passes, give turn to next player clockwise.
+		b. If player bets, ask betting amount, move that amount from that player to the pot, then give turn to the next player clockwise.
+		c. If player raises, ask amount, move that amount from that player to the pot, then give turn to the next player clockwise.
+		d. If player folds, reduce number of players by 1, and then remove the player's name from list and then move turn to the next player clockwise.
+	3. Repeat 2 until reaching the end of the round in one of the following scenarios:
+		a. If everyone passes.
+		b. If someone bets and everyone folds or matches.
+		c. If one person raises, and everyone either folds, matches.
+		d. If all but one person fold.
